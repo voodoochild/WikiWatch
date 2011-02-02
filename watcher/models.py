@@ -52,4 +52,3 @@ class Article(models.Model):
         # self.visited = True
         
         return self.save()
-
