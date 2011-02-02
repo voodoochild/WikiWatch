@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}WikiWatch{% endblock %}</title>
+	{% block stylesheets %}
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Serif">
+	<link rel="stylesheet" href="static/styles/reset.css">
+	<link rel="stylesheet" href="static/styles/wikiwatch.css">
+	{% endblock stylesheets %}
+</head>
+<body>
+	<div id="container">
+		{% block content %}{% endblock content %}
+	</div>
+</body>
+</html>

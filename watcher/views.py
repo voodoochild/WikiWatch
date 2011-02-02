@@ -1,5 +1,7 @@
 from urllib import unquote
+
 from django.http import HttpResponse
+
 from models import Article
 from tasks import visit_article
 
@@ -18,3 +20,9 @@ def add_link(request):
             return HttpResponse('Article already exists: %s' % obj.url)
     
     return HttpResponse('No URL specified')
+
+
+def index(request):
+    return request.Context({
+        'articles': Article.objects.all()
+    }).render_response('index.html')
