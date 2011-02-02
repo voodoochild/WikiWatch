@@ -1,0 +1,35 @@
+<html>
+<script src="jquery-1.4.4.min.js"></script>
+<script>
+
+Watcher = function() {
+    var tabs = [];
+    
+    return {
+        add: function(url) {
+            if (-1 < url.indexOf('wikipedia.org') || -1 < url.indexOf('wikimedia.org')) {
+                if (-1 === $.inArray(url, tabs)) {
+                    tabs[tabs.length] = url;
+                    $.get('http://localhost:8000/add_link/', {
+                        'url': url
+                    }, function(data) {
+                        console.log(data);
+                    });
+                }
+            }
+        },
+        
+        get: function() {
+            chrome.windows.getCurrent(function(window) {
+	            chrome.tabs.getSelected(window.id, function(tab) {
+		            Watcher.add(tab.url);
+	            });
+	        });
+        }
+    };
+}();
+
+setInterval(Watcher.get, 5000);
+
+</script>
+</html>

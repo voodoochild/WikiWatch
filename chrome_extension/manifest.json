@@ -1,0 +1,10 @@
+{
+    "name": "WikiWatch",
+    "version": "1.0",
+    "description": "Logs all pages viewed on Wikipedia",
+    "permissions": [
+        "tabs",
+        "<all_urls>"
+    ],
+    "background_page": "background.html"
+}
