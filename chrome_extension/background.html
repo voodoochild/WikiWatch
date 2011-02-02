@@ -10,7 +10,7 @@ Watcher = function() {
             if (-1 < url.indexOf('wikipedia.org') || -1 < url.indexOf('wikimedia.org')) {
                 if (-1 === $.inArray(url, tabs)) {
                     tabs[tabs.length] = url;
-                    $.get('http://localhost:8000/add_link/', {
+                    $.get('http://devboxtoo:8000/add_link/', {
                         'url': url
                     }, function(data) {
                         console.log(data);

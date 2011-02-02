@@ -80,5 +80,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'djanjinja',
+    'djcelery',
     'watcher',
 )
+
+# Setup celery broker
+import djcelery
+djcelery.setup_loader()
+
+BROKER_HOST = 'localhost'
+BROKER_PORT = 5672
+BROKER_VHOST = 'wikiwatch'
+BROKER_USER = 'rabbit'
+BROKER_PASSWORD = 'rabbit'
