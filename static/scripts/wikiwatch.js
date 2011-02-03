@@ -15,11 +15,11 @@ WikiWatch.expandCollapse = function() {
         
         switch ($this.attr('mode')) {
             case 'closed':
-                $this.parent('li').children('ul').toggle();
+                $this.parent('li').children('ul').show();
                 $this.html('Less').attr('mode', 'open');
                 break;
             default:
-                $this.parent('li').children('ul').toggle();
+                $this.parent('li').children('ul').hide();
                 $this.html('More').attr('mode', 'closed');
         }
         

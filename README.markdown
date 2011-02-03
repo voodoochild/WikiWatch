@@ -24,6 +24,7 @@ This project comprises two parts; a Chrome browser extension which reports whene
 
 * How should anchors (e.g. /wiki/Spaced#Simon_Pegg) be handled
 * Should Category: namespaces be captured instead of being ignored
+* Add a timestamp to show when the page was last visited and only revisit after a set period of time
 
 ## Chrome extension
 

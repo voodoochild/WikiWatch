@@ -40,20 +40,32 @@ def visit_article(article_id):
     
     # Set a title for this article if there isn't one
     if not article.title:
-        h1 = soup('h1')
-        article.title = h1[0].find('i').string
+        try:
+            h1 = soup('h1')
+            article.title = h1[0].find('i').string
+        except NoneType, err:
+            logger.error(err)
     
     # Loop through all links in the article
     for tag in soup('a'):
         try:
             href = tag['href']
-            title = tag.string
+            title = tag['title']
             
             if re.match('^/wiki/.+$', href):
+                
+                # Remove any anchor from the end of the url
+                regex = re.compile('^(/wiki/.+)#.*$')
+                r = regex.search(href)
+                try:
+                    href = r.groups()[0]
+                except AttributeError:
+                    pass
                 
                 # Check to see if any banned namespaces are present
                 pattern = ''.join(['^/wiki/(Wikipedia|Special|Help|Talk|File|',
                     'Category|Portal|Template|Template_talk):.+$'])
+                
                 if not re.match(pattern, href):
                     logger.info('Found %s (%s)' % (href, title))
                     url = 'http://en.wikipedia.org%s' % href

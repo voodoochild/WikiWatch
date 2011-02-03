@@ -24,6 +24,6 @@ def add_link(request):
 
 def index(request):
     return request.Context({
-        'articles': Article.objects.filter(visited=True)
+        'articles': Article.objects.filter(visited=True).order_by('title')
     }).render_response('watcher/index.html')
 

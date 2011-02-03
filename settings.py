@@ -93,3 +93,4 @@ BROKER_PORT = 5672
 BROKER_VHOST = 'wikiwatch'
 BROKER_USER = 'rabbit'
 BROKER_PASSWORD = 'rabbit'
+CELERYD_CONCURRENCY = 1 # sqlite can't do concurrent writes

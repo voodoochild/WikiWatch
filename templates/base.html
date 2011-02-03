@@ -10,6 +10,7 @@
 	{% endblock stylesheets %}
 </head>
 <body>
+    <script>document.body.className=(document.body.className)?document.body.className+' js':'js';</script>
 	<div id="container">
 		{% block content %}{% endblock content %}
 	</div>

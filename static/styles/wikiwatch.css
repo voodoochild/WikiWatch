@@ -37,6 +37,10 @@ ul li {
     margin-left: 20px;
 }
 
+body.js ul li ul {
+    display: none;
+}
+
 ul li ul li {
     font-size: 10px;
     margin-left: 30px;
