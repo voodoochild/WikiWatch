@@ -47,6 +47,7 @@ ul li ul li {
 }
 
 h1 span.version {
+    color: #9ed9a0;
     font-size: 12px;
 }
 
@@ -60,7 +61,12 @@ ul li a.expand {
 ul li a.expand {
     background-color: #fff;
     color: #666;
+    display: none;
     padding: 0 3px;
+}
+
+body.js ul li a.expand {
+    display: inline;
 }
 
 ul li a.expand:hover {

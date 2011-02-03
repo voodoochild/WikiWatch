@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>WikiWatch Options</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Serif">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="watcher.css">
+</head>
+<script src="jquery-1.5.min.js"></script>
+<script src="watcher.js"></script>
+<body>
+    <div id="container">
+        <h1>WikiWatch <span class="subtext">Options</span></h1>
+        <form id="options">
+            <fieldset>
+                <label for="upload_url">Upload URL:</label>
+                <input type="text" name="upload_url" id="upload_url" placeholder="e.g. http://wikiwatch.mythlan.co.uk" value="">
+                <input type="submit" value="Save">
+                <span class="confirmation"></span>
+            </fieldset>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            Watcher.options.init('#options');
+        });
+    </script>
+</body>
+</html>

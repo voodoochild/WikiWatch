@@ -24,6 +24,7 @@ This project comprises two parts; a Chrome browser extension which reports whene
 
 * Should Category: namespaces be captured instead of being ignored
 * Add a timestamp to show when the page was last visited and only revisit after a set period of time
+* Refactor visit_article() to find a better way to add articles to article.links
 
 ## Chrome extension
 

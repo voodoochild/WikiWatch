@@ -1,67 +1,7 @@
 <html>
-<script src="jquery-1.4.4.min.js"></script>
+<script src="jquery-1.5.min.js"></script>
+<script src="watcher.js"></script>
 <script>
-/**
- * Watcher module
- *
- * @author Kriss Watt <kriss.watt@gmail.com>
- * @version 1.0
- * @return {Object} Public methods.
- */
-Watcher = function() {
-    var visited_urls = [];
-    
-    /**
-     * Checks the URL for the presence of a banned namespace.
-     *
-     * @private
-     * @param {String} url The URL to test.
-     * @return {Boolean} True if banned namespace is found in URL.
-     */
-    var containsBannedNamespace = function(url) {
-        var pattern = '\/wiki\/(Wikipedia|Special|Help|File|Talk|Category|' +
-            'Portal|Template|Template_talk):.+',
-            regex = new RegExp(pattern);
-        matches = regex.exec(url);
-        return matches && 0 < matches.length;
-    };
-    
-    return {
-        /**
-         * If the URL points to wikipedia, it is logged to WikiWatch.
-         *
-         * @param {String} url The URL to log.
-         */
-        add: function(url) {
-            if (-1 < url.indexOf('wikipedia.org') || -1 < url.indexOf('wikimedia.org')) {
-                if (-1 === $.inArray(url, visited_urls) && !containsBannedNamespace(url)) {                    
-                    visited_urls[visited_urls.length] = url;
-                    console.log('Sending ' + url);
-                    $.get('http://localhost:8000/add_link/', {
-                        'url': url
-                    }, function(data) {
-                        console.log(data);
-                    });
-                }
-                else {
-                    console.log(url + ' has already been visited or contains a banned namespace');
-                }
-            }
-        },
-        
-        /**
-         * Gets the URL from the current Chrome tab.
-         */
-        get: function() {
-            chrome.windows.getCurrent(function(window) {
-	            chrome.tabs.getSelected(window.id, function(tab) {
-		            Watcher.add(tab.url);
-	            });
-	        });
-        }
-    };
-}();
-
-setInterval(Watcher.get, 5000);
+setInterval(Watcher.background.get, 3000);
 </script>
 </html>

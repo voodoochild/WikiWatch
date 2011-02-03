@@ -29,8 +29,7 @@ WikiWatch.expandCollapse = function() {
     return {
         init: function(selector) {
             $(selector).each(function() {
-                $(this).click(onClick);
-                $(this).trigger('click');
+                $(this).attr('mode', 'closed').click(onClick);
             });
         },
     };

@@ -15,7 +15,7 @@
 		{% if article.visited %} <span>Visited</span>{% endif %}
 		{% if article.links.count() > 0 %}
 		 <span>{{ article.links.filter(visited=True).count() }}/{{ article.links.count() }}</span>
-		 <a href="#" class="expand">less</a>
+		 <a href="#" class="expand">More</a>
         <ul>
 	        {% for link in article.links.all().order_by('title') %}
 	        <li>
