@@ -50,16 +50,21 @@ def visit_article(article_id):
             title = tag.string
             
             if re.match('^/wiki/.+$', href):
-                logger.info('Found %s (%s)' % (href, title))
-                url = 'http://en.wikipedia.org%s' % href
-                obj, created = Article.objects.get_or_create(url=url)
-                if title:
-                    obj.title = title
-                    obj.save() # Need to find a better way to do this
-                if created:
-                    logger.info('Created new article: %s' % obj.url)
-                if not obj == article:
-                    article.links.add(obj)
+                
+                # Check to see if any banned namespaces are present
+                pattern = ''.join(['^/wiki/(Wikipedia|Special|Help|Talk|File|',
+                    'Category|Portal|Template|Template_talk):.+$'])
+                if not re.match(p, href):
+                    logger.info('Found %s (%s)' % (href, title))
+                    url = 'http://en.wikipedia.org%s' % href
+                    obj, created = Article.objects.get_or_create(url=url)
+                    if title:
+                        obj.title = title
+                        obj.save() # Need to find a better way to do this
+                    if created:
+                        logger.info('Created new article: %s' % obj.url)
+                    if not obj == article:
+                        article.links.add(obj)
         except KeyError:
             pass
     
@@ -67,3 +72,4 @@ def visit_article(article_id):
     article.save()
     
     return True
+

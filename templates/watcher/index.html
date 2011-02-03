@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+{{ super() }}
+<script src="static/scripts/wikiwatch.js"></script>
+{% endblock scripts %}
+
+{% block content %}
+<h1>WikiWatch <span class="version">v1.0</span></h1>
+{% if articles.count() > 0 %}
+<ul>
+	{% for article in articles %}
+	<li>
+		<a href="{{ article.url }}">{{ article.title }}</a>
+		{% if article.visited %} <span>Visited</span>{% endif %}
+		{% if article.links.count() > 0 %}
+		 <span>{{ article.links.filter(visited=True).count() }}/{{ article.links.count() }}</span>
+		 <a href="#" class="expand">less</a>
+        <ul>
+	        {% for link in article.links.all().order_by('title') %}
+	        <li>
+		        <a href="{{ link.url }}">{{ link.title }}</a>
+		        {% if link.visited %} <span>Visited</span>{% endif %}
+	        </li>
+	        {% endfor %}
+        </ul>
+        {% endif %}
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+{% endblock content %}

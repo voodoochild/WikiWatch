@@ -4,6 +4,15 @@ body {
     font: 14px/1.8 "Droid Serif", Georgia, serif;
 }
 
+/** Structure */
+
+#container {
+    margin: 0 0 0 300px;
+    width: 600px;
+}
+
+/** Elements */
+
 h1 {
     font-size: 48px;
     line-height: 2;
@@ -13,23 +22,43 @@ h1 {
 a,
 a:visited {
     color: #ddd;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 p {
     margin-bottom: 10px;
 }
 
-#container {
-    margin: 0 auto;
-    width: 600px;
+ul li {
+    margin-left: 20px;
+}
+
+ul li ul li {
+    font-size: 10px;
+    margin-left: 30px;
 }
 
 h1 span.version {
     font-size: 12px;
 }
 
-ul li span {
+ul li span,
+ul li a.expand {
     font: 9px/1 Arial, sans-serif;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+ul li a.expand {
+    background-color: #fff;
+    color: #666;
+    padding: 0 3px;
+}
+
+ul li a.expand:hover {
+    text-decoration: none;
 }

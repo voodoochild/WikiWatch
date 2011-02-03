@@ -24,5 +24,6 @@ def add_link(request):
 
 def index(request):
     return request.Context({
-        'articles': Article.objects.all()
-    }).render_response('index.html')
+        'articles': Article.objects.filter(visited=True)
+    }).render_response('watcher/index.html')
+
