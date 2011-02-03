@@ -1,7 +1,8 @@
 body {
-    background-color: #666;
+    background: #666 url(../images/pw.png) bottom left no-repeat;
     color: #fff;
     font: 14px/1.8 "Droid Serif", Georgia, serif;
+    min-height: 764px;
 }
 
 /** Structure */

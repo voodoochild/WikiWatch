@@ -24,7 +24,11 @@ This project comprises two parts; a Chrome browser extension which reports whene
 
 * Should Category: namespaces be captured instead of being ignored
 * Add a timestamp to show when the page was last visited and only revisit after a set period of time
-* Refactor visit_article() to find a better way to add articles to article.links
+* Try to think of a way to reduce SQL queries when importing links in visit_article()
+
+### Benchmarks
+
+03/02/11: Article with 1706 links took 10 minutes to process.
 
 ## Chrome extension
 
@@ -33,3 +37,4 @@ This project comprises two parts; a Chrome browser extension which reports whene
 * Remove anchors from URLs before sending to the server
 * Add a config screen to specify upload URL and auth details
 * Which method of auth: oAuth, unique upload URL, or "something else"
+* Add a popup.html which shows all articles logged in the current session
