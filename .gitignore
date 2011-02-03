@@ -2,3 +2,4 @@
 db
 venv/
 bootstrap.py
+.DS_Store

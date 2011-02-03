@@ -1,14 +1,16 @@
 body {
     background: #666 url(../images/pw.png) bottom left no-repeat;
+    border-bottom: 3px solid #555;
     color: #fff;
     font: 14px/1.8 "Droid Serif", Georgia, serif;
-    min-height: 764px;
+    min-height: 500px;
 }
 
 /** Structure */
 
 #container {
     margin: 0 0 0 300px;
+    padding-bottom: 30px;
     width: 600px;
 }
 
@@ -36,6 +38,12 @@ p {
 
 ul li {
     margin-left: 20px;
+}
+
+ul li.visited span {
+    background-color: #fff;
+    color: #666;
+    padding: 0 3px;
 }
 
 body.js ul li ul {

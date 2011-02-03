@@ -64,7 +64,7 @@ def visit_article(article_id):
                 
                 # Check to see if any banned namespaces are present
                 pattern = ''.join(['^/wiki/(Wikipedia|Special|Help|Talk|File|',
-                    'Category|Portal|Template|Template_talk):.+$'])
+                    'Portal|Template|Template_talk):.+$'])
                 
                 if not re.match(pattern, href):
                     logger.info('Found %s (%s)' % (href, title))

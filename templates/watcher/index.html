@@ -12,13 +12,12 @@
 	{% for article in articles %}
 	<li>
 		<a href="{{ article.url }}">{{ article.title }}</a>
-		{% if article.visited %} <span>Visited</span>{% endif %}
 		{% if article.links.count() > 0 %}
-		 <span>{{ article.links.filter(visited=True).count() }}/{{ article.links.count() }}</span>
+		 <span>Links {{ article.links.filter(visited=True).count() }}/{{ article.links.count() }}</span>
 		 <a href="#" class="expand">More</a>
         <ul>
 	        {% for link in article.links.all().order_by('title') %}
-	        <li>
+	        <li{% if link.visited %} class="visited"{% endif %}>
 		        <a href="{{ link.url }}">{{ link.title }}</a>
 		        {% if link.visited %} <span>Visited</span>{% endif %}
 	        </li>

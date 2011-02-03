@@ -22,7 +22,7 @@ Watcher.background = function() {
      * @return {Boolean} True if banned namespace is found in URL.
      */
     var containsBannedNamespace = function(url) {
-        var pattern = '\/wiki\/(Wikipedia|Special|Help|File|Talk|Category|' +
+        var pattern = '\/wiki\/(Wikipedia|Special|Help|File|Talk|' +
             'Portal|Template|Template_talk):.+',
             regex = new RegExp(pattern);
         matches = regex.exec(url);
@@ -40,7 +40,6 @@ Watcher.background = function() {
         if (!url || '' === url) {
             throw 'Watcher: no upload URL has been configured';
         }
-        
         return url;
     };
     
@@ -51,14 +50,23 @@ Watcher.background = function() {
          * @param {String} url The URL to log.
          */
         add: function(url) {
-            if (-1 < url.indexOf('wikipedia.org') || -1 < url.indexOf('wikimedia.org')) {
-                if (-1 === $.inArray(url, visited_urls) && !containsBannedNamespace(url)) {                    
-                    visited_urls[visited_urls.length] = url;
-                    $.get(getUploadUrl(), {
-                        'url': url
-                    }, function(data) {
-                        console.log(data);
-                    });
+            var wpedia = url.indexOf('wikipedia.org'),
+                wmedia = url.indexOf('wikimedia.org');
+            if (-1 < wpedia || -1 < wmedia) {
+                if (!containsBannedNamespace(url)) {
+                    // TODO: this looks like it will break very easily
+                    var matches = url.match(/(\/wiki\/.+)#.*$/);
+                        url = (matches) ?
+                            'http://en.wikipedia.org' + matches[1] : url;
+                    
+                    if (-1 === $.inArray(url, visited_urls)) {
+                        visited_urls[visited_urls.length] = url;
+                        $.get(getUploadUrl(), {
+                            'url': url
+                        }, function(data) {
+                            console.log(data);
+                        });
+                    }
                 }
             }
         },
