@@ -7,7 +7,6 @@ This project comprises two parts; a Chrome browser extension which reports whene
 ### Requirements
 
 * [paver](http://pypi.python.org/pypi/Paver/1.0.4)
-* [setuptools](http://pypi.python.org/pypi/setuptools)
 * [virtualenv](http://pypi.python.org/pypi/virtualenv/1.5.1)
 * [RabbitMQ](http://www.rabbitmq.com/)
 
@@ -23,20 +22,12 @@ This project comprises two parts; a Chrome browser extension which reports whene
 
 ### Notes
 
-The following namespaces need to be handled in some way:
-
-* Special:
-* Help:
-* Talk:
-* Wikipedia:
-* File:
-* Category:
-
-Should we strip hashes from the end of urls?
+* How should anchors (e.g. /wiki/Spaced#Simon_Pegg) be handled
+* Should Category: namespaces be captured instead of being ignored
 
 ## Chrome extension
 
 ### Notes
 
 * Add a config screen to specify upload URL and auth details
-* What auth? oAuth, unique upload URL, or something else?
+* Which method of auth: oAuth, unique upload URL, or "something else"

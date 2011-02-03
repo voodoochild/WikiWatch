@@ -54,7 +54,7 @@ def visit_article(article_id):
                 # Check to see if any banned namespaces are present
                 pattern = ''.join(['^/wiki/(Wikipedia|Special|Help|Talk|File|',
                     'Category|Portal|Template|Template_talk):.+$'])
-                if not re.match(p, href):
+                if not re.match(pattern, href):
                     logger.info('Found %s (%s)' % (href, title))
                     url = 'http://en.wikipedia.org%s' % href
                     obj, created = Article.objects.get_or_create(url=url)
