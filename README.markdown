@@ -22,7 +22,6 @@ This project comprises two parts; a Chrome browser extension which reports whene
 
 ### Notes
 
-* How should anchors (e.g. /wiki/Spaced#Simon_Pegg) be handled
 * Should Category: namespaces be captured instead of being ignored
 * Add a timestamp to show when the page was last visited and only revisit after a set period of time
 
@@ -30,5 +29,6 @@ This project comprises two parts; a Chrome browser extension which reports whene
 
 ### Notes
 
+* Remove anchors from URLs before sending to the server
 * Add a config screen to specify upload URL and auth details
 * Which method of auth: oAuth, unique upload URL, or "something else"
