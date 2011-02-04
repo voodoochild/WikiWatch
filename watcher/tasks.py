@@ -1,6 +1,7 @@
 import re
 import socket
 import urllib2
+from datetime import datetime
 from celery.task import task
 from BeautifulSoup import BeautifulSoup
 
@@ -42,9 +43,10 @@ def visit_article(article_id):
     if not article.title:
         try:
             h1 = soup('h1')
-            article.title = h1[0].find('i').string
-        except NoneType, err:
-            logger.error(err)
+            h1 = h1[0]
+            article.title = h1.find('i').string if h1.find('i') else h1.string
+        except AttributeError, err:
+            logger.info(err)
     
     # Loop through all links in the article
     for tag in soup('a'):
@@ -80,7 +82,7 @@ def visit_article(article_id):
         except KeyError:
             pass
     
-    article.visited = True
+    article.visited = datetime.now()
     article.save()
     
     return True

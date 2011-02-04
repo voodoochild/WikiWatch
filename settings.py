@@ -84,6 +84,8 @@ INSTALLED_APPS = (
     'watcher',
 )
 
+AUTH_PROFILE_MODULE = 'watcher.UserProfile'
+
 # Setup celery broker
 import djcelery
 djcelery.setup_loader()

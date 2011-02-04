@@ -13,7 +13,7 @@
 	<li>
 		<a href="{{ article.url }}">{{ article.title }}</a>
 		{% if article.links.count() > 0 %}
-		 <span>Links {{ article.links.filter(visited=True).count() }}/{{ article.links.count() }}</span>
+		 <span>Links {{ article.links.filter(visited__isnull=False).count() }}/{{ article.links.count() }}</span>
 		 <a href="#" class="expand">More</a>
         <ul>
 	        {% for link in article.links.all().order_by('title') %}
