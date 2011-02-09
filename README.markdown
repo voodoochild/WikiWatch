@@ -15,10 +15,11 @@ This project comprises two parts; a Chrome browser extension which reports whene
 1. `git clone git@github.com:voodoochild/WikiWatch.git`
 2. `paver create_bootstrap`
 3. `python bootstrap.py`
-4. `venv/bin/python manage.py syncdb --noinput`
-5. `rabbitmqctl add_user <username> <password>`
-6. `rabbitmqctl add_vhost <vhost>`
-7. `rabbitmqctl set_permissions -p <vhost> <username> ".*" ".*" ".*"`
+4. `venv/bin/pip install -e git://github.com/dwaiter/django-bcrypt.git#egg=django-bcrypt`
+5. `venv/bin/python manage.py syncdb --noinput`
+6. `rabbitmqctl add_user <username> <password>`
+7. `rabbitmqctl add_vhost <vhost>`
+8. `rabbitmqctl set_permissions -p <vhost> <username> ".*" ".*" ".*"`
 
 ### Notes
 

@@ -1,4 +1,5 @@
 import os
+import sys
 
 LOCAL_DEVELOPMENT = TEMPLATE_DEBUG = DEBUG = True
 
@@ -81,6 +82,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'djanjinja',
     'djcelery',
+    'django_bcrypt',
     'watcher',
 )
 

@@ -25,5 +25,6 @@ def create_bootstrap():
 	    'celery==2.2.1',
 	    'django-celery==2.2.1',
 	    'BeautifulSoup==3.2.0',
+	    'py-bcrypt',
 	], '', dest_dir=pathtoenv, no_site_packages=True)
 
