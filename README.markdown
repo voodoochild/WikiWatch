@@ -34,3 +34,4 @@ This project comprises two parts; a Chrome browser extension which reports whene
 * Add a config screen to specify upload URL and auth details
 * Which method of auth: oAuth, unique upload URL, or "something else"
 * Add a popup.html which shows all articles logged in the current session
+* Ignore /wiki/Main_Page

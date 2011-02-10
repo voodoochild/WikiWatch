@@ -5,7 +5,7 @@ from datetime import datetime
 from celery.task import task
 from BeautifulSoup import BeautifulSoup
 
-from watcher.models import Article
+from watcher.models import Article, Category
 
 SOCKET_TIMEOUT = 10
 
@@ -55,6 +55,9 @@ def visit_article(article_id):
             title = tag['title']
             
             if re.match('^/wiki/.+$', href):
+                # Ignore if it is /wiki/Main_Page
+                if re.match('^/wiki/Main_Page.*$', href):
+                    continue;
                 
                 # Remove any anchor from the end of the url
                 regex = re.compile('^(/wiki/.+)#.*$')
@@ -69,16 +72,31 @@ def visit_article(article_id):
                     'Portal|Template|Template_talk):.+$'])
                 
                 if not re.match(pattern, href):
-                    logger.info('Found %s (%s)' % (href, title))
-                    url = 'http://en.wikipedia.org%s' % href
-                    obj, created = Article.objects.get_or_create(url=url)
-                    if title:
-                        obj.title = title
-                        obj.save() # Need to find a better way to do this
-                    if created:
-                        logger.info('Created new article: %s' % obj.url)
-                    if not obj == article:
-                        article.links.add(obj)
+                    # Category
+                    if re.match('^/wiki/Category:.+$', href):
+                        logger.info('Found category %s (%s)' % (href, title))
+                        url = 'http://en.wikipedia.org%s' % href
+                        obj, created = Category.objects.get_or_create(url=url)
+                        if title:
+                            obj.title = title.replace('Category:', '')
+                            obj.save()
+                        if created:
+                            logger.info('Created new category: %s' % obj.url)
+                        if not obj in article.categories.all():
+                            article.categories.add(obj)
+                    
+                    # Article
+                    else:
+                        logger.info('Found article %s (%s)' % (href, title))
+                        url = 'http://en.wikipedia.org%s' % href
+                        obj, created = Article.objects.get_or_create(url=url)
+                        if title:
+                            obj.title = title
+                            obj.save()
+                        if created:
+                            logger.info('Created new article: %s' % obj.url)
+                        if not obj == article:
+                            article.links.add(obj)
         except KeyError:
             pass
     

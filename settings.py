@@ -61,6 +61,10 @@ MIDDLEWARE_CLASSES = (
     'djanjinja.middleware.RequestContextMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+)
+
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (

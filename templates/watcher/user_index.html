@@ -6,22 +6,23 @@
 {% endblock scripts %}
 
 {% block content %}
-<h1>WikiWatch <span class="version">v1.0</span></h1>
+<h1><a href="/">WikiWatch <span class="version">v1.0</span></a></h1>
 {% if request.user.is_authenticated() %}<a href="{{ url('logout') }}">Logout</a>{% endif %}
-<p>This screen is showing all articles logged by all users.</p>
+<p>This screen is showing all articles logged by {% if user == request.user %}you{% else %}{{ user.username }}{% endif %}.</p>
 {% if articles.count() > 0 %}
 <ul>
 	{% for article in articles %}
 	<li>
 		<a href="{{ article.url }}">{{ article.title }}</a>
 		{% if article.links.count() > 0 %}
-		<span>{{ article.links.filter(visited__isnull=False).count() }}/{{ article.links.count() }}</span>
+		<span>{{ article.user_visited_links(user) }}/{{ article.links.count() }}</span>
 		<a href="#" class="expand">More</a>
         <ul>
 	        {% for link in article.links.all().order_by('title') %}
-	        <li{% if link.visited %} class="visited"{% endif %}>
+	        {% set visited = link in user.get_profile().articles.all() %}
+	        <li{% if visited %} class="visited"{% endif %}>
 		        <a href="{{ link.url }}">{{ link.title }}</a>
-		        {% if link.visited %} <span>Visited</span>{% endif %}
+		        {% if visited %} <span>Visited</span>{% endif %}
 	        </li>
 	        {% endfor %}
         </ul>

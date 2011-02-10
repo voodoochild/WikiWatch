@@ -32,6 +32,16 @@ a:hover {
     text-decoration: underline;
 }
 
+h1 a,
+h1 a:hover,
+h1 a:visited {
+    color: #fff;
+}
+
+h1 a:hover {
+    text-decoration: none;
+}
+
 p {
     margin-bottom: 10px;
 }

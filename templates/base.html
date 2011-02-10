@@ -5,10 +5,10 @@
 	<title>{% block title %}WikiWatch{% endblock %}</title>
 	{% block stylesheets %}
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Serif">
-	<link rel="stylesheet" href="static/styles/reset.css">
-	<link rel="stylesheet" href="static/styles/wikiwatch.css">
+	<link rel="stylesheet" href="/static/styles/reset.css">
+	<link rel="stylesheet" href="/static/styles/wikiwatch.css">
 	{% endblock stylesheets %}
-	<link rel="icon" href="static/images/favicon.ico">
+	<link rel="icon" href="/static/images/favicon.ico">
 </head>
 <body>
     <script>document.body.className=(document.body.className)?document.body.className+' js':'js';</script>
@@ -16,7 +16,7 @@
 		{% block content %}{% endblock content %}
 	</div>
 	{% block scripts %}
-	<script src="static/scripts/jquery-1.5.min.js"></script>
+	<script src="/static/scripts/jquery-1.5.min.js"></script>
     {% endblock scripts %}
 </body>
 </html>

@@ -3,15 +3,44 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
 
+class Category(models.Model):
+    url = models.CharField(max_length=255, db_index=True)
+    title = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
+    
+    def __unicode__(self):
+        return self.title
+
+
 class Article(models.Model):
     url = models.CharField(max_length=255, db_index=True)
     title = models.CharField(max_length=255, blank=True)
     links = models.ManyToManyField('self', symmetrical=False)
     visited = models.DateTimeField(blank=True, null=True, db_index=True)
+    categories = models.ManyToManyField(Category)
     created = models.DateTimeField(auto_now_add=True, db_index=True)
     
     def __unicode__(self):
         return self.title
+    
+    def user_visited_links(self, user):
+        visited = 0
+        profile = user.get_profile()
+        
+        for link in self.links.all():
+            if link in profile.articles.all():
+                visited = visited + 1
+        
+        return visited
+
+
+class Visit(models.Model):
+    user = models.ForeignKey(User)
+    article = models.ForeignKey(Article)
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
+    
+    def __unicode__(self):
+        return '%s: %s' % (self.user.username, self.article.title)
 
 
 class UserProfile(models.Model):
@@ -44,6 +73,9 @@ class UserProfile(models.Model):
                     break
             
         return super(UserProfile, self).save(*args, **kwargs)
+    
+    def visited_articles(self):
+        return Visit.objects.filter(user=self.user).order_by('created')
 
 def auto_create_profile(sender, instance, created, **kwargs):
     if created:
